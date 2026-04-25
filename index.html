@@ -16,7 +16,7 @@
         .tabs { display: flex; background: #f8fafc; border-radius: 8px; overflow: hidden; margin-bottom: 25px; border: 1px solid #e2e8f0; }
         .tab-btn { flex: 1; padding: 12px 5px; text-align: center; font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: none; color: #64748b; transition: 0.2s; }
         .tab-btn:hover { background: #f1f5f9; }
-        .tab-btn.active { background: #3498db; color: white; }
+        .tab-btn.active { background: #2ecc71; color: white; }
         
         .panel { display: none; margin-bottom: 25px; }
         
@@ -29,15 +29,15 @@
         .slider-btn { width: 36px; height: 36px; min-width: 36px; border-radius: 50%; border: 1px solid #cbd5e1; background: white; cursor: pointer; font-weight: bold; color: #334155; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; }
         .slider-btn:hover { background: #f1f5f9; border-color: #94a3b8; }
         .slider-btn:active { transform: scale(0.95); }
-        input[type=range] { flex-grow: 1; margin: 0 15px; cursor: pointer; accent-color: #3498db; }
+        input[type=range] { flex-grow: 1; margin: 0 15px; cursor: pointer; accent-color: #2ecc71; }
         
         .month-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
         .month-btn { flex: 1; min-width: 40px; padding: 8px 4px; font-size: 11px; font-weight: 600; color: #64748b; background: white; border: 1px solid #cbd5e1; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
         .month-btn:hover { background: #f1f5f9; border-color: #94a3b8; }
-        .month-btn.active { background: #3498db; color: white; border-color: #3498db; box-shadow: 0 2px 6px rgba(52, 152, 219, 0.3); }
+        .month-btn.active { background: #2ecc71; color: white; border-color: #2ecc71; box-shadow: 0 2px 6px rgba(46, 204, 113, 0.3); }
         
         #total-stats { margin-top: 15px; padding: 20px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center; }
-        #stat-number { font-size: 32px; font-weight: 800; color: #3498db; display: block; margin: 5px 0; }
+        #stat-number { font-size: 32px; font-weight: 800; color: #2ecc71; display: block; margin: 5px 0; }
         
         /* City Labels on Map */
         .city-label { text-align: center; pointer-events: none; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; }
@@ -45,7 +45,7 @@
         .city-label .val { font-size: 13px; font-weight: 900; color: #95a5a6; margin-top: 2px; }
         
         .city-label.active-label .name { color: #2c3e50; font-size: 10px; }
-        .city-label.active-label .val { color: #08519c; font-size: 16px; }
+        .city-label.active-label .val { color: #c0392b; font-size: 16px; }
 
         /* Info Legend */
         .info-legend { padding: 12px; background: rgba(255,255,255,0.95); box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 8px; font-size: 12px; color: #444; }
@@ -67,11 +67,11 @@
             position: fixed;
             z-index: 2000;
             border-radius: 50%;
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
             color: white;
             border: none;
             cursor: pointer;
-            box-shadow: 0 3px 12px rgba(52, 152, 219, 0.45);
+            box-shadow: 0 3px 12px rgba(46, 204, 113, 0.45);
             transition: background 0.25s, transform 0.2s;
             align-items: center;
             justify-content: center;
@@ -399,11 +399,11 @@
     function getColor(d, max) {
         if (d === 0 || max === 0) return '#ffffff';
         let ratio = d / max;
-        if (ratio > 0.8) return '#08519c';
-        if (ratio > 0.6) return '#3182bd';
-        if (ratio > 0.4) return '#6baed6';
-        if (ratio > 0.2) return '#bdd7e7';
-        return '#eff3ff';
+        if (ratio > 0.8) return '#006d2c';
+        if (ratio > 0.6) return '#31a354';
+        if (ratio > 0.4) return '#74c476';
+        if (ratio > 0.2) return '#bae4b3';
+        return '#edf8e9';
     }
 
     function style(feature, maxVal) {
@@ -432,13 +432,13 @@
         if (val === 0) {
             popupHtml += `<div style="color:#e74c3c;font-weight:bold;margin-top:5px;">Kayıt Yok</div></div>`;
         } else {
-            popupHtml += `<div style="color:#3498db;font-weight:bold;margin-top:5px;">${val} Kadro Bulundu</div></div>`;
+            popupHtml += `<div style="color:#2ecc71;font-weight:bold;margin-top:5px;">${val} Kadro Bulundu</div></div>`;
             popupHtml += `<div class="popup-content"><ul>`;
             let records = feature.properties.currentRecords.sort((a,b) => b.dhy - a.dhy);
             records.forEach(r => {
                 popupHtml += `<li>
                     <span style="background:#eee;padding:2px 5px;border-radius:3px;font-weight:bold;">DHY ${r.dhy}</span> <span style="font-size:10px;color:#888;">(${r.month} ${r.year})</span>
-                    <strong style="float:right; color:#3498db; font-size:14px;">${r.sayi}</strong><br>
+                    <strong style="float:right; color:#2ecc71; font-size:14px;">${r.sayi}</strong><br>
                     <span style="color:#333;display:block;margin-top:4px;">${r.birim}</span>
                 </li>`;
             });
