@@ -207,71 +207,55 @@
            ═══════════════════════════════════════════ */
         #compare-view { display:none; position:fixed; top:0; left:0; right:0; bottom:0; z-index:3000; background:#0f172a; flex-direction:column; }
         #compare-view.active { display:flex; }
-        #compare-controls {
-          padding:10px 16px; display:flex; align-items:center; justify-content:center; gap:10px;
-          background:rgba(15,23,42,0.95); backdrop-filter:blur(12px); box-shadow:0 2px 12px rgba(0,0,0,0.4); z-index:10;
+        
+        #compare-header {
+            height: 40px; padding: 0 16px; display: flex; align-items: center; justify-content: center;
+            background: rgba(15,23,42,0.95); backdrop-filter: blur(12px); box-shadow: 0 2px 12px rgba(0,0,0,0.4); z-index: 10; position: relative;
         }
-        #compare-controls .cv-mode-btn { padding:4px 16px; border:none; background:transparent; color:#94a3b8; font-weight:bold; cursor:pointer; font-size:12px; border-radius:6px; transition:0.2s; }
-        #compare-controls .cv-mode-btn.active { background:#2ecc71; color:#fff; }
-        #compare-controls .cv-box { text-align:center; min-width:80px; }
-        #compare-controls .cv-num { font-size:16px; font-weight:800; color:#fff; }
-        #compare-controls .cv-date { font-size:10px; color:#94a3b8; min-height:12px; }
-        #compare-controls .cv-btn {
-          width:28px; height:28px; min-width:28px; border-radius:50%; border:1px solid #334155;
-          background:#1e293b; color:#e2e8f0; cursor:pointer; font-weight:bold;
-          display:flex; align-items:center; justify-content:center; transition:0.15s; font-size:12px;
+        .ch-modes { display: flex; background: #1e293b; border-radius: 6px; padding: 2px; }
+        .ch-modes .cv-mode-btn { padding: 4px 16px; border: none; background: transparent; color: #94a3b8; font-weight: bold; cursor: pointer; font-size: 12px; border-radius: 6px; transition: 0.2s; }
+        .ch-modes .cv-mode-btn.active { background: #2ecc71; color: #fff; }
+        .cv-close { position: absolute; right: 12px; top: 6px; width: 28px; height: 28px; border-radius: 50%; background: #fee2e2; color: #ef4444; border: none; cursor: pointer; font-weight: bold; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+
+        #compare-maps { flex: 1; display: flex; flex-direction: row; overflow: hidden; }
+        .cmp-wrap { flex: 1; position: relative; overflow: hidden; display: flex; flex-direction: column; background: #0f172a; }
+        .cmp-wrap+.cmp-wrap { border-left: 2px solid #1e293b; }
+        .cmp-map { flex: 1; width: 100%; height: 100%; }
+
+        .cv-floating-ctrl {
+            position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 1000;
+            background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px);
+            padding: 4px 10px; border-radius: 30px; display: flex; align-items: center; justify-content: center; gap: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);
+            flex-wrap: nowrap; white-space: nowrap;
         }
-        #compare-controls .cv-btn:hover { background:#334155; }
-        #compare-controls .cv-btn:active { transform:scale(0.9); }
-        #compare-controls input[type=range] { width:min(180px,20vw); cursor:pointer; accent-color:#2ecc71; }
-        #compare-controls .cv-close {
-          position:absolute; right:12px; top:12px;
-          width:28px; height:28px; border-radius:50%; background:#fee2e2; color:#ef4444;
-          border:none; cursor:pointer; font-weight:bold; font-size:14px;
-          display:flex; align-items:center; justify-content:center;
-        }
-        #compare-maps { flex:1; display:flex; flex-direction:row; overflow:hidden; }
-        .cmp-wrap { flex:1; position:relative; overflow:hidden; }
-        .cmp-wrap+.cmp-wrap { border-left:2px solid #1e293b; }
-        .cmp-map { width:100%; height:100%; }
-        .cmp-title {
-          position:absolute; top:8px; left:50%; transform:translateX(-50%); z-index:1200;
-          background:rgba(15,23,42,0.85); backdrop-filter:blur(8px); color:#fff;
-          padding:4px 14px; border-radius:20px; font-size:11px; font-weight:700;
-          white-space:nowrap; pointer-events:none; box-shadow:0 2px 8px rgba(0,0,0,0.3);
-        }
-        #compare-bottom {
-          height:40px; display:flex; align-items:center; justify-content:center;
-          background:rgba(15,23,42,0.95); backdrop-filter:blur(12px); box-shadow:0 -2px 8px rgba(0,0,0,0.3);
-        }
-        .cb-stat { flex:1; display:flex; align-items:center; justify-content:center; gap:6px; height:100%; border-right:1px solid #1e293b; }
-        .cb-stat:last-child { border-right:none; }
-        .cb-stat .cbl { font-size:9px; font-weight:700; color:#64748b; text-transform:uppercase; }
-        .cb-stat .cbn { font-size:16px; font-weight:800; color:#2ecc71; }
+        .cv-box { text-align: center; min-width: 50px; line-height: 1.1; }
+        .cv-num { font-size: 13px; font-weight: 800; color: #fff; }
+        .cv-date { font-size: 8px; color: #94a3b8; }
+        .cv-btn { width: 22px; height: 22px; border-radius: 50%; border: none; background: #334155; color: #fff; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; transition: 0.15s; font-size: 10px; }
+        .cv-btn:hover { background: #475569; }
+        .cv-btn:active { transform: scale(0.9); }
+        .cv-floating-ctrl input[type=range] { width: min(80px, 15vw); cursor: pointer; accent-color: #58d68d; margin: 0; height: 10px; }
+        .cv-total { font-size: 10px; font-weight: 700; color: #58d68d; margin-left: 2px; padding-left: 6px; border-left: 1px solid #334155; }
+
         @media (max-width:768px),(max-height:500px) and (orientation:portrait) {
-          #compare-maps { flex-direction:column; }
-          .cmp-wrap+.cmp-wrap { border-left:none; border-top:2px solid #1e293b; }
-          #compare-controls { flex-wrap:wrap; padding:6px; }
-          #compare-controls input[type=range] { width:min(120px,25vw); margin:0 4px; }
-          #compare-controls .cv-box { min-width:50px; }
-          #compare-controls .cv-num { font-size:13px; }
-          .cmp-title { font-size:9px; padding:3px 8px; }
-          .cb-stat .cbl { font-size:7px; } .cb-stat .cbn { font-size:12px; }
-          #compare-bottom { height:32px; }
-          .cv-ctrl-group { gap:2px !important; }
-          .cv-btn { width:24px!important; height:24px!important; min-width:24px!important; font-size:10px!important; }
+            #compare-maps { flex-direction: column; }
+            .cmp-wrap+.cmp-wrap { border-left: none; border-top: 2px solid #1e293b; }
+            .cv-floating-ctrl { bottom: 10px; padding: 4px 8px; gap: 4px; }
+            #compare-header { height: 32px; padding: 0 8px; }
+            .cv-close { width: 22px; height: 22px; font-size: 12px; top: 5px; right: 8px; }
+            .ch-modes .cv-mode-btn { padding: 2px 10px; font-size: 10px; }
         }
         @media (max-height:500px) and (orientation:landscape) {
-          #compare-maps { flex-direction:row; }
-          .cmp-wrap+.cmp-wrap { border-left:2px solid #1e293b; border-top:none; }
-          #compare-controls { padding:4px 6px; }
-          #compare-controls .cv-num { font-size:11px; }
-          #compare-controls .cv-btn { width:20px!important; height:20px!important; min-width:20px!important; font-size:9px!important; }
-          #compare-controls input[type=range] { width:min(100px,15vw); margin:0 2px; }
-          .cmp-title { font-size:8px; padding:2px 6px; top:3px; }
-          .cb-stat .cbl { font-size:6px; } .cb-stat .cbn { font-size:10px; }
-          #compare-bottom { height:24px; }
-          .cv-ctrl-group { gap:2px !important; }
+            #compare-header { height: 26px; }
+            .ch-modes .cv-mode-btn { padding: 1px 8px; font-size: 9px; }
+            .cv-close { width: 18px; height: 18px; font-size: 9px; top: 4px; right: 4px; }
+            .cv-floating-ctrl { bottom: 8px; padding: 2px 6px; gap: 3px; }
+            .cv-btn { width: 18px; height: 18px; font-size: 8px; }
+            .cv-floating-ctrl input[type=range] { width: 60px; height: 6px; }
+            .cv-num { font-size: 10px; }
+            .cv-date { font-size: 7px; }
+            .cv-total { font-size: 9px; padding-left: 4px; }
         }
     </style>
 </head>
@@ -285,7 +269,6 @@
             document.body.classList.add('is-mobile');
             document.body.classList.add(isLandscape ? 'is-landscape' : 'is-portrait');
         }
-    })();
     })();
 </script>
 
@@ -353,43 +336,36 @@
 
 <!-- KARŞILAŞTIRMA GÖRÜNÜMÜ -->
 <div id="compare-view">
-  <div id="compare-controls" style="flex-direction:column; gap:6px; padding-top:6px;">
-    
-    <div style="display:flex; background:#1e293b; border-radius:6px; padding:2px; margin-bottom:2px;">
+  <div id="compare-header">
+    <div class="ch-modes">
       <button class="cv-mode-btn active" id="cv-btn-dhy" onclick="setCmpMode('dhy')">DHY</button>
       <button class="cv-mode-btn" id="cv-btn-year" onclick="setCmpMode('year')">Yıl</button>
     </div>
-    
-    <div style="display:flex; width:100%; justify-content:space-around; align-items:center; padding:0 10px; gap:10px; flex-wrap:wrap;">
-      <div class="cv-ctrl-group" style="display:flex; align-items:center; gap:8px;">
+    <button class="cv-close" onclick="setMode('dhy')" title="Kapat">✕</button>
+  </div>
+  
+  <div id="compare-maps">
+    <div class="cmp-wrap">
+      <div id="cmp-map-l" class="cmp-map"></div>
+      <div class="cv-floating-ctrl" onmousedown="L.DomEvent.stopPropagation(event)" onscroll="L.DomEvent.stopPropagation(event)">
+        <div class="cv-box"><div class="cv-num" id="cv-l-val"></div><div class="cv-date" id="cv-l-date"></div></div>
         <button class="cv-btn" id="cv-l-prev">&#9664;</button>
         <input type="range" id="cv-l-slider">
         <button class="cv-btn" id="cv-l-next">&#9654;</button>
-        <div class="cv-box"><div class="cv-num" id="cv-l-val"></div><div class="cv-date" id="cv-l-date"></div></div>
+        <div class="cv-total">Total: <span id="cv-l-total">0</span></div>
       </div>
-      
-      <div class="cv-ctrl-group" style="display:flex; align-items:center; gap:8px;">
+    </div>
+    
+    <div class="cmp-wrap">
+      <div id="cmp-map-r" class="cmp-map"></div>
+      <div class="cv-floating-ctrl" onmousedown="L.DomEvent.stopPropagation(event)" onscroll="L.DomEvent.stopPropagation(event)">
         <div class="cv-box"><div class="cv-num" id="cv-r-val"></div><div class="cv-date" id="cv-r-date"></div></div>
         <button class="cv-btn" id="cv-r-prev">&#9664;</button>
         <input type="range" id="cv-r-slider">
         <button class="cv-btn" id="cv-r-next">&#9654;</button>
+        <div class="cv-total">Total: <span id="cv-r-total">0</span></div>
       </div>
     </div>
-    <button class="cv-close" onclick="setMode('dhy')" title="Kapat">✕</button>
-  </div>
-  <div id="compare-maps">
-    <div class="cmp-wrap">
-      <div class="cmp-title" id="cmp-title-l"></div>
-      <div id="cmp-map-l" class="cmp-map"></div>
-    </div>
-    <div class="cmp-wrap">
-      <div class="cmp-title" id="cmp-title-r"></div>
-      <div id="cmp-map-r" class="cmp-map"></div>
-    </div>
-  </div>
-  <div id="compare-bottom">
-    <div class="cb-stat"><span class="cbl" id="cb-lbl-l">Sol</span><span class="cbn" id="ct-l">0</span></div>
-    <div class="cb-stat"><span class="cbl" id="cb-lbl-r">Sağ</span><span class="cbn" id="ct-r">0</span></div>
   </div>
 </div>
 
@@ -681,7 +657,7 @@
     // ══════════════════════════════════════════════════════
     //  KARŞILAŞTIRMA MODU (AH vs AH)
     // ══════════════════════════════════════════════════════
-    let cmpL, cmpR, cmpGeoL, cmpGeoR, cmpLabelsL, cmpLabelsR, cmpLegL, cmpLegR;
+    let cmpL, cmpR, cmpGeoL, cmpGeoR, cmpLabelsL, cmpLabelsR;
     let cmpInited = false;
     let cmpMode = 'dhy'; 
     let cmpLeftVal = 127;
@@ -755,11 +731,6 @@
         document.getElementById('cv-r-val').innerText = formatVal(cmpRightVal);
         document.getElementById('cv-l-date').innerText = getDateText(cmpLeftVal);
         document.getElementById('cv-r-date').innerText = getDateText(cmpRightVal);
-        
-        document.getElementById('cmp-title-l').innerText = formatVal(cmpLeftVal);
-        document.getElementById('cmp-title-r').innerText = formatVal(cmpRightVal);
-        document.getElementById('cb-lbl-l').innerText = formatVal(cmpLeftVal);
-        document.getElementById('cb-lbl-r').innerText = formatVal(cmpRightVal);
     }
 
     cvLSlider.addEventListener('input', e => { cmpLeftVal = parseInt(e.target.value); updateCompareControls(); updateCompareMaps(); });
@@ -770,27 +741,31 @@
     document.getElementById('cv-r-prev').addEventListener('click', () => { if(cmpRightVal > parseInt(cvRSlider.min)) { cmpRightVal--; updateCompareControls(); updateCompareMaps(); } });
     document.getElementById('cv-r-next').addEventListener('click', () => { if(cmpRightVal < parseInt(cvRSlider.max)) { cmpRightVal++; updateCompareControls(); updateCompareMaps(); } });
 
-    function updateOneCmpMap(mapObj, targetVal, labels, existingLayer, existingLeg, totalId) {
-        let maxV=0, totV=0;
+    function updateOneCmpMap(mapObj, targetVal, labels, existingLayer, totalId) {
+        let totV=0;
         let gc = JSON.parse(JSON.stringify(geoData));
         gc.features.forEach(f => {
             let recs = appData[f.properties.name_upper] || [];
             let flt = recs.filter(r => cmpMode === 'dhy' ? r.dhy === targetVal : r.year === targetVal);
             let s=0; flt.forEach(r => s+=r.sayi);
             f.properties.currentVal = s; f.properties.currentRecords = flt;
-            if(s>maxV) maxV=s; totV+=s;
+            totV += s;
         });
         document.getElementById(totalId).innerText = totV.toLocaleString('tr-TR');
         if(existingLayer) mapObj.removeLayer(existingLayer);
         labels.clearLayers();
         let nl = L.geoJson(gc, {
-            style: function(f) { return { fillColor:getColor(f.properties.currentVal,maxV), weight:1.5, opacity:1, color:'#bdc3c7', fillOpacity:f.properties.currentVal>0?0.9:0.4 }; },
+            style: function(f) { 
+                // Yalnızca kayıt varsa sabit açık yeşil (#58d68d), yoksa beyaz göster.
+                let hasVal = f.properties.currentVal > 0;
+                return { fillColor: hasVal ? '#58d68d' : '#ffffff', weight: 1.5, opacity: 1, color: '#bdc3c7', fillOpacity: hasVal ? 0.85 : 0.4 }; 
+            },
             onEachFeature: function(ft,ly) {
                 ly.on({ mouseover:function(e){ e.target.setStyle({weight:3,color:'#34495e'}); e.target.bringToFront(); labels.bringToFront(); }, mouseout:function(e){ nl.resetStyle(e.target); } });
                 let v=ft.properties.currentVal;
                 let p='<div class="popup-header"><h3>'+ft.properties.name+'</h3>';
                 if(v===0) p+='<div style="color:#e74c3c;font-weight:bold;margin-top:4px;">Kayıt Yok</div></div>';
-                else { p+='<div style="color:#2ecc71;font-weight:bold;margin-top:4px;">'+v+' Kadro</div></div><div class="popup-content"><ul>'; ft.properties.currentRecords.forEach(r=>{ p+='<li><b>DHY '+r.dhy+'</b> ('+r.month+' '+r.year+') <strong style="float:right;color:#2ecc71;">'+r.sayi+'</strong><br><span style="color:#333;">'+r.birim+'</span></li>'; }); p+='</ul></div>'; }
+                else { p+='<div style="color:#58d68d;font-weight:bold;margin-top:4px;">'+v+' Kadro</div></div><div class="popup-content"><ul>'; ft.properties.currentRecords.forEach(r=>{ p+='<li><b>DHY '+r.dhy+'</b> ('+r.month+' '+r.year+') <strong style="float:right;color:#58d68d;">'+r.sayi+'</strong><br><span style="color:#333;">'+r.birim+'</span></li>'; }); p+='</ul></div>'; }
                 ly.bindPopup(p, {maxWidth:280,minWidth:180});
             }
         }).addTo(mapObj);
@@ -799,17 +774,12 @@
             let v=ly.feature.properties.currentVal; if(v<=0) return;
             if(ly.getBounds) { try { let c=ly.getBounds().getCenter(); L.marker(c,{icon:L.divIcon({className:'custom-div-icon',html:'<div class="city-label"><div class="name" style="font-size:7px;">'+ly.feature.properties.name+'</div><div class="val" style="font-size:11px;color:#c0392b;">'+v+'</div></div>',iconSize:[55,25],iconAnchor:[27,12]}),interactive:false}).addTo(labels); } catch(e){} }
         });
-        if(existingLeg) mapObj.removeControl(existingLeg);
-        let nLeg=null;
-        if(maxV>0) { nLeg=L.control({position:'bottomleft'}); nLeg.onAdd=function(){ let d=L.DomUtil.create('div','info-legend'); d.innerHTML='<b style="display:block;margin-bottom:4px;font-size:9px;">Kadro</b>'; let gr=[1,maxV*0.5]; if(maxV<3) gr=[1,2]; gr=[...new Set(gr.map(g=>Math.ceil(g)))].filter(g=>g<=maxV); gr.forEach(g=>{ d.innerHTML+='<i style="background:'+getColor(g,maxV)+';border:1px solid #ddd;width:12px;height:12px;"></i><span style="line-height:14px;font-size:9px;"> '+g+'</span><br>'; }); return d; }; nLeg.addTo(mapObj); }
-        return {layer:nl, legend:nLeg};
+        return nl;
     }
 
     function updateCompareMaps() {
-        let r1 = updateOneCmpMap(cmpL, cmpLeftVal, cmpLabelsL, cmpGeoL, cmpLegL, 'ct-l');
-        cmpGeoL=r1.layer; cmpLegL=r1.legend;
-        let r2 = updateOneCmpMap(cmpR, cmpRightVal, cmpLabelsR, cmpGeoR, cmpLegR, 'ct-r');
-        cmpGeoR=r2.layer; cmpLegR=r2.legend;
+        cmpGeoL = updateOneCmpMap(cmpL, cmpLeftVal, cmpLabelsL, cmpGeoL, 'cv-l-total');
+        cmpGeoR = updateOneCmpMap(cmpR, cmpRightVal, cmpLabelsR, cmpGeoR, 'cv-r-total');
     }
 
     window.addEventListener('resize', function() { if(cmpInited) { setTimeout(function(){ cmpL.invalidateSize(); cmpR.invalidateSize(); }, 200); } });
