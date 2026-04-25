@@ -683,6 +683,33 @@
             });
         }
         syncM(cmpL, cmpR); syncM(cmpR, cmpL);
+        
+        let syncingPopup = false;
+        cmpL.on('popupopen', function(e) {
+            if(syncingPopup) return; syncingPopup=true;
+            if(e.popup && e.popup._source && e.popup._source.feature) {
+                let fname = e.popup._source.feature.properties.name;
+                if(cmpGeoR) cmpGeoR.eachLayer(function(l){ if(l.feature && l.feature.properties.name === fname) l.openPopup(); });
+            }
+            syncingPopup=false;
+        });
+        cmpR.on('popupopen', function(e) {
+            if(syncingPopup) return; syncingPopup=true;
+            if(e.popup && e.popup._source && e.popup._source.feature) {
+                let fname = e.popup._source.feature.properties.name;
+                if(cmpGeoL) cmpGeoL.eachLayer(function(l){ if(l.feature && l.feature.properties.name === fname) l.openPopup(); });
+            }
+            syncingPopup=false;
+        });
+        cmpL.on('popupclose', function(e) {
+            if(syncingPopup) return; syncingPopup=true;
+            cmpR.closePopup(); syncingPopup=false;
+        });
+        cmpR.on('popupclose', function(e) {
+            if(syncingPopup) return; syncingPopup=true;
+            cmpL.closePopup(); syncingPopup=false;
+        });
+
         cmpInited = true;
         setTimeout(function() { cmpL.invalidateSize(); cmpR.invalidateSize(); }, 200);
         
